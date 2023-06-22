@@ -36,8 +36,8 @@ if yd == None:
     exit()
 
 
-
-dir = r"C:\Users\domin\Videos\Captures"
+#please add the path of your drive where you want to place in the .mp4 file
+dir = r"C:\Users\"
 
 Answer = input("Do you want to download this video? (y/n)\n" + yt.title)
 if Answer == "y":
