@@ -39,12 +39,12 @@ if yd == None:
 
 dir = r"C:\Users\domin\Videos\Captures"
 
-Answer = input("Do you want to download this video? (y/n) " + yt.title)
+Answer = input("Do you want to download this video? (y/n)\n" + yt.title)
 if Answer == "y":
-    print("Downloading...")
+    print(color.GREEN + "\nDownloading...\n" + color.END)
 else:
     exit()
 
 
 yd.download(dir)
-print("Download completed! File saved in: " + dir)
+print(color.GREEN + "Download completed!" + color.END + " File saved in: " + color.UNDERLINE + dir + color.END)
