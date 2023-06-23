@@ -14,6 +14,10 @@ class color:
    UNDERLINE = '\033[4m'
    END = '\033[0m'
 
+if len(argv) < 2:
+    print("\n" + color.RED + "please add the URL after the path \n" + color.END)
+    exit()
+
 link = argv[1]
 yt = YouTube(link)
 debug = False
@@ -36,10 +40,10 @@ if yd == None:
     exit()
 
 
-#please add the path of your drive where you want to place in the .mp4 file
-dir = r"C:\Users\"
 
-Answer = input("Do you want to download this video? (y/n)\n" + yt.title)
+dir = r"C:\Users\domin\Videos\Captures"
+
+Answer = input("Do you want to download this video? (y/n)\n")
 if Answer == "y":
     print(color.GREEN + "\nDownloading...\n" + color.END)
 else:
