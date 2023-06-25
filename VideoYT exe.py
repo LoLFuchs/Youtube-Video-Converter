@@ -40,7 +40,7 @@ def main():
 
 
 
-    dir = r"C:\Users\domin\Videos\Captures"
+    dir = r""
 
     Answer = input("\nDo you want to download this video? (y/n)\n")
     if Answer == "y" or "Y":
