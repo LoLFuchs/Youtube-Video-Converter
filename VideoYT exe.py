@@ -1,5 +1,7 @@
 from pytube import YouTube
 import time
+import os
+import json
 
 class color:
    PURPLE = '\033[95m'
@@ -14,6 +16,28 @@ class color:
    END = '\033[0m'
 
 
+dir = "None"
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+folder_path = current_dir + '/Videos'
+file_path = current_dir + "/dir.txt"
+
+def doesFileExists(filePathAndName):
+    return os.path.exists(filePathAndName)
+
+if not os.path.exists(folder_path):
+     os.makedirs(folder_path)
+
+# Example
+if doesFileExists(file_path):
+  with open(file_path, 'r') as f:
+    dir = json.load(f)
+else:
+  with open(file_path, 'w') as json_file:
+    json.dump(file_path, json_file)
+
+dir = folder_path
 
 
 debug = False
@@ -39,11 +63,8 @@ def main():
         exit()
 
 
-
-    dir = r""
-
     Answer = input("\nDo you want to download this video? (y/n)\n")
-    if Answer == "y" or "Y":
+    if Answer.lower() == "y":
         print(color.GREEN + "\nDownloading...\n" + color.END)
     else:
         exit()
@@ -53,7 +74,7 @@ def main():
     print(color.GREEN + "Download completed!" + color.END + " File saved in: " + color.UNDERLINE + dir + color.END)
 
     again = input("\nDo you want to download another video? (y/n)\n")
-    if again == "y" or "Y":
+    if again.lower() == "y":
         main()
     else:
         print(color.PURPLE + "\n \nmade by LoLFuchs" + color.END)
