@@ -15,21 +15,25 @@ class color:
    UNDERLINE = '\033[4m'
    END = '\033[0m'
 
-
+# deklare dir
 dir = "None"
 
+#set current dir
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
+#set folder and file (dir) path
 folder_path = current_dir + '/Videos'
 file_path = current_dir + "/dir.txt"
 
+# function called to check if the dir file exist
 def doesFileExists(filePathAndName):
     return os.path.exists(filePathAndName)
 
+#checks if the folder Video exist, if not it creates one
 if not os.path.exists(folder_path):
      os.makedirs(folder_path)
 
-# Example
+# check if file dir.txt exist, and create one. plus put in the right path
 if doesFileExists(file_path):
   with open(file_path, 'r') as f:
     dir = json.load(f)
@@ -37,10 +41,11 @@ else:
   with open(file_path, 'w') as json_file:
     json.dump(file_path, json_file)
 
+#sets dir to the place where the videos are going to be placed in.
 dir = folder_path
 
 
-debug = False
+#main function that runs the converter
 def main():
     link = input(color.GREEN + "\nplease enter a Youtube URL\n" + color.END)
     yt = YouTube(link)
