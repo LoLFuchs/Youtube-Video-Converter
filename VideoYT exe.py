@@ -2,6 +2,8 @@ from pytube import YouTube
 import time
 import os
 import json
+from pytube.exceptions import VideoUnavailable
+import sys
 
 class color:
    PURPLE = '\033[95m'
@@ -19,7 +21,10 @@ class color:
 dir = "None"
 
 #set current dir
-current_dir = os.path.dirname(os.path.abspath(__file__))
+if getattr(sys, 'frozen', False):
+    current_dir = os.path.dirname(sys.executable)
+elif __file__:
+    current_dir = os.path.dirname(__file__)
 
 #set folder and file (dir) path
 folder_path = current_dir + '/Videos'
@@ -47,18 +52,22 @@ dir = folder_path
 
 #main function that runs the converter
 def main():
-    link = input(color.GREEN + "\nplease enter a Youtube URL\n" + color.END)
-    yt = YouTube(link)
+    link = input(color.GREEN + "\nplease enter a Youtube URL\n\n" + color.END)
+
+    try: 
+        yt = YouTube(link)
+    except VideoUnavailable:
+            print(f'Video {link} is unavaialable, skipping.')   
 
     if yt == None:
         print(color.RED + "Invalid YouTube link or video is unavailable." + color.END)
         time.sleep(5)
         exit()
-
+# bug yt. unbound 
     print("\nTitle: ", yt.title)
     print("\nViews: ", yt.views)
 
-
+#chypher code ändern 
 
     yd = yt.streams.get_highest_resolution()
 
