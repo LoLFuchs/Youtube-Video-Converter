@@ -9,6 +9,13 @@ You need:
 # Step by Step
 
 1. Download the repo
-2. copy the path of the repo copy on your device
-3. go in the code an change the dir to the place where you want to place the file
-4. go in the powershell and type in (python (Path of the repo) <url>)
+2. start the exe file
+
+#find the right directory
+when you first start the exe fill, it will create a 'dir.txt' file which contains the information where the pogramm will put in the videos. 
+You can change the Information in the 'dir.txt' to a valid path. 
+
+1. start the exe for the first time
+2. go in the 'dir.txt' and change the path
+3. done
+
