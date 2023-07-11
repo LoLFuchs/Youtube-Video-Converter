@@ -27,16 +27,13 @@ elif __file__:
     current_dir = os.path.dirname(__file__)
 
 #set folder and file (dir) path
-folder_path = current_dir + '/Videos'
-file_path = current_dir + "/dir.txt"
+folder_path = current_dir + '\Videos'
+file_path = current_dir + "\dir.txt"
 
 # function called to check if the dir file exist
 def doesFileExists(filePathAndName):
     return os.path.exists(filePathAndName)
 
-#checks if the folder Video exist, if not it creates one
-if not os.path.exists(folder_path):
-     os.makedirs(folder_path)
 
 # check if file dir.txt exist, and create one. plus put in the right path
 if doesFileExists(file_path):
@@ -44,10 +41,11 @@ if doesFileExists(file_path):
     dir = json.load(f)
 else:
   with open(file_path, 'w') as json_file:
-    json.dump(file_path, json_file)
-
-#sets dir to the place where the videos are going to be placed in.
-dir = folder_path
+    dir = json.dump(folder_path, json_file)
+    
+#checks if the folder Video exist, if not it creates one
+if not os.path.exists(dir):
+    os.makedirs(dir)
 
 
 #main function that runs the converter
