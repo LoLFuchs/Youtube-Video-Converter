@@ -1,28 +1,48 @@
+
 # Youtube-Video-Converter
 
-This is a Youtube Video Converter 
-
-You need: 
--> pytube modul
--> python 
-
-# Step by Step
-
-1. Download the .exe file
-1. start the .exe
-2. past in the URL for the video you want to download
-3. wait until the download is ready
-4. done 
+This program is a simple YouTube converter application built using the Tkinter library for the graphical user interface (GUI) and the Pytube library for downloading YouTube videos or audio. The application allows the user to download either the video or audio of a given YouTube link.
 
 
-#find the right directory
-when you first start the exe fill, it will create a 'dir.txt' file which contains the information where the pogramm will put in the videos. 
-You can change the Information in the 'dir.txt' to a valid path. 
+![Logo](https://i.ibb.co/Lz3dF0F/Icon.png)
 
-1. start the exe for the first time
-2. look in the dir.txt next to the .exe file
-3. change the content of the dir.txt to the path you want to put it in
 
-please dont put the path in quotation marks, just put it raw in like: 
+## Screenshots
+ Screenshot from the programm V.0.0.1
+###  Main Frame
+![App Screenshot](https://i.ibb.co/YXfBvzn/Screenshot-2023-07-20-193705.png)
+### Convert Frame
+![App Screenshot](https://i.ibb.co/3fkLJ3M/Screenshot-2023-07-20-195057.png)
+## Features
 
-``` C:/User/Videos ```
+- Video HD download
+- Audio download
+- fast download
+- free
+- only URL needed
+
+
+## 📝 License
+
+This project is licensed under [MIT](https://github.com/LoLFuchs/Youtube-Video-Converter/blob/main/LICENSE)license.
+
+
+## FAQ
+
+#### Is this Converter Free?
+
+Its totaly free, you only need a computer to run it
+
+#### I can´t download this Video / Audio, what is the problem?
+
+This porgramm works with, pytube a libary for python, and is connected to youtube so you can download youtube videos etc. sometimes pytube can´t download videos or audio because it can´t find the url, this isn´t the fault of the user. we´re working fast to fix the issues you have, so please create a issue on this repo so we can work on the problem. 
+
+### I can´t change my directory
+
+Just edit the dir.txt file the python file always creats one in the same directory where the file is located.
+please dont write the path with quotes, just put it raw into the file and save.
+
+
+## 🚀 About Me
+Nothing much to say so 
+
