@@ -61,7 +61,7 @@ root.wm_iconphoto(False, photo)
 def main():
     #Input form the text box
     link = link_entry.get()
-    print(Mode)
+
     
     global yt
     global yd
@@ -76,14 +76,12 @@ def main():
     except VideoUnavailable:
         messagebox.showwarning("Error", f'Video {link} is unavaialable.')
         return   
-
+    #checks if yt is a valid link
     if yt == None:
         messagebox.showwarning("Error", "Invalid YouTube link or video is unavailable.")
         return
-
-    print("\nTitle: ", yt.title)
-    print("\nViews: ", yt.views)
-
+    
+    #checks if the cobnvert is a video or a audio
     if Mode == "video":
         yd = yt.streams.get_highest_resolution()
     elif Mode == "audio":
@@ -94,8 +92,9 @@ def main():
         return
 
     yd.download(dir)
-
-    messagebox.showinfo("Complete","Download completed!"" File saved in: " + dir)
+    link_entry.delete(0, tk.END)
+    go_back()
+    messagebox.showinfo("Complete","Download completed!""\n \n File saved in: \n" + dir)
 
 
 def open_convert_window(selection):
@@ -107,7 +106,6 @@ def open_convert_window(selection):
 def go_back():
     convert_frame.pack_forget()
     main_frame.pack()
-
 
 
 main_frame = tk.Frame(root)
