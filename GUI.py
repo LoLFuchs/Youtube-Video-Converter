@@ -8,6 +8,8 @@ from PIL import Image, ImageTk
 
 
 
+switch_value = True
+
 Mode = "None"
 dir = "None"
 iconDir = os.getcwd() + r"\Icon.png"
@@ -88,7 +90,57 @@ def go_back():
     main_frame.pack()
 
 
+def toggle():
+  
+    global switch_value
+    if switch_value == True:
+        switch.config(bg="#26242f",
+                      activebackground="#26242f")
+          
+        # Changes the window to dark theme
+        settings_frame.config(bg="#26242f")  
+        main_frame.config(bg="#26242f")
+        convert_frame.config(bg="#26242f")
+        root.config(bg="#26242f")
 
+        back_button.config(bg="#26242f", fg="#ffffff", activebackground="#26242f", activeforeground="#ffffff")
+        back_button_Conv.config(bg="#26242f", fg="#ffffff", activebackground="#26242f", activeforeground="#ffffff")
+        settings_button.config(bg="#26242f", fg="#ffffff", activebackground="#26242f", activeforeground="#ffffff")
+        audio_button.config(bg="#26242f", fg="#ffffff", activebackground="#26242f", activeforeground="#ffffff")
+        video_button.config(bg="#26242f", fg="#ffffff", activebackground="#26242f", activeforeground="#ffffff")
+        convert_button.config(bg="#26242f", fg="#ffffff", activebackground="#26242f", activeforeground="#ffffff")
+
+        link_entry.config(bg="#26242f", fg="#ffffff", insertbackground="#ffffff")
+        link_label.config(bg="#26242f", fg="#ffffff")
+        panel.config(bg="#26242f")
+        Welcome_label.config(bg="#26242f", fg="#ffffff")
+
+        
+        switch_value = False
+  
+    else:
+        switch.config( bg="white", 
+                      activebackground="white")
+          
+        # Changes the window to light theme
+        settings_frame.config(bg="white")  
+        main_frame.config(bg="white")
+        convert_frame.config(bg="white")
+        root.config(bg="white")
+
+        back_button.config(bg="white", fg="#000000", activebackground="white", activeforeground="#000000")
+        back_button_Conv.config(bg="white", fg="#000000", activebackground="white", activeforeground="#000000")
+        settings_button.config(bg="white", fg="#000000", activebackground="white", activeforeground="#000000")
+        audio_button.config(bg="white", fg="#000000", activebackground="white", activeforeground="#000000")
+        video_button.config(bg="white", fg="#000000", activebackground="white", activeforeground="#000000")
+        convert_button.config(bg="white", fg="#000000", activebackground="white", activeforeground="#000000")
+
+        link_entry.config(bg="white", fg="#000000", insertbackground="#000000")
+        link_label.config(bg="white", fg="#000000")
+        panel.config(bg="white")
+        Welcome_label.config(bg="white", fg="#000000")
+
+        switch_value = True
 
 main_frame = tk.Frame(root)
 convert_frame = tk.Frame(root)
@@ -127,14 +179,18 @@ link_entry.pack(pady=5)
 convert_button = tk.Button(convert_frame, text="Convert", command=main)
 convert_button.pack(pady=10)
 
-back_button = tk.Button(convert_frame, text="Back", command=go_back)
-back_button.pack(pady=5)
+back_button_Conv = tk.Button(convert_frame, text="Back", command=go_back)
+back_button_Conv.pack(pady=5)
 
 # ------ SETTINGS FRAME ------
 
 back_button = tk.Button(settings_frame, text="Back", command=go_back)
 back_button.pack()
 
+switch = tk.Button(settings_frame, bd=0, bg="white",text="Light Mode", activebackground="white", command=toggle)
+switch.pack(padx=50, pady=150)
+
 main_frame.pack()
 
+toggle()
 root.mainloop()
