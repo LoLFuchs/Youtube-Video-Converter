@@ -10,7 +10,7 @@ from PIL import Image, ImageTk
 
 Mode = "None"
 dir = "None"
-iconDir = os.getcwd() + r"\yt Downloader\Icon.png"
+iconDir = os.getcwd() + r"\Icon.png"
 print(iconDir)
 
 #init app
@@ -71,6 +71,10 @@ def main():
     messagebox.showinfo("Complete","Download completed!""\n \n File saved in: \n" + dir)
 
 
+def open_settings_window():
+    main_frame.pack_forget()
+    settings_frame.pack()
+
 def open_convert_window(selection):
     main_frame.pack_forget()
     convert_frame.pack()
@@ -80,6 +84,7 @@ def open_convert_window(selection):
 def go_back():
     link_entry.delete(0, tk.END)
     convert_frame.pack_forget()
+    settings_frame.pack_forget()
     main_frame.pack()
 
 
@@ -87,25 +92,29 @@ def go_back():
 
 main_frame = tk.Frame(root)
 convert_frame = tk.Frame(root)
+settings_frame = tk.Frame(root)
+
+# ------ MAIN FRAME ------
+
+settings_button = tk.Button(main_frame, text="⚙️", command=lambda: open_settings_window())
+settings_button.pack(pady=10, padx=10, anchor=tk.NE)
 
 #main_frame widget
-Welcome_label = tk.Label(main_frame, text="Python Youtube Converter", font=("arial",25))
-Welcome_label.pack(pady=20)
+Welcome_label = tk.Label(main_frame, text="Python Youtube Converter", font=("arial", 25))
+Welcome_label.pack(pady=20, padx=10, anchor=tk.NE)
 
 #tkinter picture rezise 50x50
 img = Image.open(iconDir)
 img = img.resize((200, 200))
 img = ImageTk.PhotoImage(img)
-panel = tk.Label(main_frame, image = img)
+panel = tk.Label(main_frame, image=img)
 panel.pack(pady=20)
 
-# ------ MAIN FRAME ------
-
 audio_button = tk.Button(main_frame, text="Audio", command=lambda: open_convert_window("audio"))
-audio_button.pack(pady=20)
+audio_button.pack(pady=10)
 
 video_button = tk.Button(main_frame, text="Video", command=lambda: open_convert_window("video"))
-video_button.pack(pady=20)
+video_button.pack(pady=10)
 
 # ------ CONVERT FRAME ------
 
@@ -120,6 +129,11 @@ convert_button.pack(pady=10)
 
 back_button = tk.Button(convert_frame, text="Back", command=go_back)
 back_button.pack(pady=5)
+
+# ------ SETTINGS FRAME ------
+
+back_button = tk.Button(settings_frame, text="Back", command=go_back)
+back_button.pack()
 
 main_frame.pack()
 
