@@ -8,12 +8,13 @@ from PIL import Image, ImageTk
 
 
 
+
 switch_value = True
+
 
 Mode = "None"
 dir = "None"
-iconDir = os.getcwd() + r"\Icon.png"
-print(iconDir)
+iconDir = os.getcwd() + r"\assets\Icon.png"
 
 #init app
 root = tk.Tk()
@@ -27,7 +28,11 @@ ico = Image.open(iconDir)
 photo = ImageTk.PhotoImage(ico)
 root.wm_iconphoto(False, photo)
 
+light_open = Image.open("assets/light_mode.png")
+light = ImageTk.PhotoImage(light_open)
 
+dark_open = Image.open("assets/dark_mode.png")
+dark = ImageTk.PhotoImage(dark_open)
 
 # function called when converted started
 def main():
@@ -94,51 +99,32 @@ def toggle():
   
     global switch_value
     if switch_value == True:
-        switch.config(bg="#26242f",
+        switch.config(image=light,bg="#26242f",
                       activebackground="#26242f")
-          
-        # Changes the window to dark theme
-        settings_frame.config(bg="#26242f")  
-        main_frame.config(bg="#26242f")
-        convert_frame.config(bg="#26242f")
-        root.config(bg="#26242f")
 
-        back_button.config(bg="#26242f", fg="#ffffff", activebackground="#26242f", activeforeground="#ffffff")
-        back_button_Conv.config(bg="#26242f", fg="#ffffff", activebackground="#26242f", activeforeground="#ffffff")
-        settings_button.config(bg="#26242f", fg="#ffffff", activebackground="#26242f", activeforeground="#ffffff")
-        audio_button.config(bg="#26242f", fg="#ffffff", activebackground="#26242f", activeforeground="#ffffff")
-        video_button.config(bg="#26242f", fg="#ffffff", activebackground="#26242f", activeforeground="#ffffff")
-        convert_button.config(bg="#26242f", fg="#ffffff", activebackground="#26242f", activeforeground="#ffffff")
+        for frame in frame_list:
+            frame.config(bg="#26242f")
 
-        link_entry.config(bg="#26242f", fg="#ffffff", insertbackground="#ffffff")
-        link_label.config(bg="#26242f", fg="#ffffff")
-        panel.config(bg="#26242f")
-        Welcome_label.config(bg="#26242f", fg="#ffffff")
+        for button in button_list:
+            button.config(bg="#26242f", fg="#ffffff", activebackground="#26242f", activeforeground="#ffffff")
 
+        for extra in extra_list:
+            extra.config(bg="#26242f", fg="#ffffff")
         
         switch_value = False
   
     else:
-        switch.config( bg="white", 
+        switch.config(image=dark,bg="white", 
                       activebackground="white")
           
-        # Changes the window to light theme
-        settings_frame.config(bg="white")  
-        main_frame.config(bg="white")
-        convert_frame.config(bg="white")
-        root.config(bg="white")
+        for frame in frame_list:
+            frame.config(bg="white")
 
-        back_button.config(bg="white", fg="#000000", activebackground="white", activeforeground="#000000")
-        back_button_Conv.config(bg="white", fg="#000000", activebackground="white", activeforeground="#000000")
-        settings_button.config(bg="white", fg="#000000", activebackground="white", activeforeground="#000000")
-        audio_button.config(bg="white", fg="#000000", activebackground="white", activeforeground="#000000")
-        video_button.config(bg="white", fg="#000000", activebackground="white", activeforeground="#000000")
-        convert_button.config(bg="white", fg="#000000", activebackground="white", activeforeground="#000000")
+        for button in button_list:
+            button.config(bg="white", fg="#000000", activebackground="white", activeforeground="#000000")
 
-        link_entry.config(bg="white", fg="#000000", insertbackground="#000000")
-        link_label.config(bg="white", fg="#000000")
-        panel.config(bg="white")
-        Welcome_label.config(bg="white", fg="#000000")
+        for extra in extra_list:
+            extra.config(bg="white", fg="#000000")
 
         switch_value = True
 
@@ -190,7 +176,12 @@ back_button.pack()
 switch = tk.Button(settings_frame, bd=0, bg="white",text="Light Mode", activebackground="white", command=toggle)
 switch.pack(padx=50, pady=150)
 
-main_frame.pack()
+# ------ PACKING ------
+frame_list = [main_frame, convert_frame, settings_frame, root]
+button_list = [back_button, back_button_Conv, settings_button, audio_button, video_button, convert_button]
+extra_list = [link_entry, link_label, panel, Welcome_label]
 
+
+main_frame.pack()
 toggle()
 root.mainloop()
