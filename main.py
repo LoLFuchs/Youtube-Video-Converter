@@ -94,6 +94,10 @@ def go_back():
     settings_frame.pack_forget()
     main_frame.pack()
 
+def set_def_dir():
+    global def_dir
+    def_dir = filedialog.askdirectory()
+    print(def_dir)
 
 def toggle():
   
@@ -175,6 +179,9 @@ back_button.pack()
 
 switch = tk.Button(settings_frame, bd=0, bg="white",text="Light Mode", activebackground="white", command=toggle)
 switch.pack(padx=50, pady=150)
+
+dev_folder_path = tk.Button(settings_frame, text="select default folder", command=lambda: set_def_dir())
+dev_folder_path.pack(pady=10)
 
 # ------ PACKING ------
 frame_list = [main_frame, convert_frame, settings_frame, root]
