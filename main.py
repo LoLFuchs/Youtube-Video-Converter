@@ -67,6 +67,10 @@ def main():
         yd = yt.streams.get_highest_resolution()
     elif Mode == "audio":
         yd = yt.streams.get_audio_only()
+    elif Mode == "playlist":
+        print("playlist")
+        #todo aufruf einer Funktion  welche die Playlist runterlädt 
+        return
 
     if yd == None:
         messagebox.showwarning("Error","No available streams for the highest resolution.")
@@ -157,6 +161,9 @@ audio_button.pack(pady=10)
 
 video_button = tk.Button(main_frame, text="Video", command=lambda: open_convert_window("video"))
 video_button.pack(pady=10)
+
+playlist_button = tk.Button(main_frame, text="Playlist", command=lambda: open_convert_window("playlist"))
+playlist_button.pack(pady=10)
 
 # ------ CONVERT FRAME ------
 
