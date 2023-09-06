@@ -146,7 +146,7 @@ settings_button = tk.Button(main_frame, text="⚙️", command=lambda: open_sett
 settings_button.pack(pady=10, padx=10, anchor=tk.NE)
 
 #main_frame widget
-Welcome_label = tk.Label(main_frame, text="Python Youtube Converter", font=("arial", 25))
+Welcome_label = tk.Label(main_frame, text="PyConvert", font=("arial", 25))
 Welcome_label.pack(pady=20, padx=10, anchor=tk.NE)
 
 #tkinter picture rezise 50x50
