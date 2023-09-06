@@ -1,5 +1,5 @@
 
-# Youtube-Video-Converter
+# pyConvert
 
 This program is a simple YouTube converter application built using the Tkinter library for the graphical user interface (GUI) and the Pytube library for downloading YouTube videos or audio. The application allows the user to download either the video or audio of a given YouTube link.
 
