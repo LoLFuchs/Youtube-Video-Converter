@@ -5,7 +5,9 @@ from pytube import YouTube
 import os
 from pytube.exceptions import VideoUnavailable
 from PIL import Image, ImageTk
-
+import sys
+sys.path.append(os.getcwd()+'\\chache')
+from cache.cache import *
 
 
 
@@ -36,16 +38,22 @@ dark = ImageTk.PhotoImage(dark_open)
 
 # function called when converted started
 def main():
+    global yt
+    global yd
+    
     #Input form the text box
     link = link_entry.get()
-    dir = filedialog.askdirectory()
+    
+    if get_default_dir() != "null":
+        dir = get_default_dir()
+    else: 
+        dir = filedialog.askdirectory()
 
-    if dir == "":
+    if dir == "" or dir == None:
         messagebox.showwarning("Error", "Please select a directory.")
         return
     
-    global yt
-    global yd
+
     #checks if Links is filled
     if not link:
         messagebox.showwarning("Error", "Please enter a valid link.")
@@ -101,7 +109,10 @@ def go_back():
 def set_def_dir():
     global def_dir
     def_dir = filedialog.askdirectory()
-    print(def_dir)
+    if def_dir == "":
+        messagebox.showwarning("Error", "Please select a directory.")
+    else:
+        update_default_dir(def_dir)
 
 def toggle():
   
@@ -187,12 +198,15 @@ back_button.pack()
 switch = tk.Button(settings_frame, bd=0, bg="white",text="Light Mode", activebackground="white", command=toggle)
 switch.pack(padx=50, pady=150)
 
-dev_folder_path = tk.Button(settings_frame, text="select default folder", command=lambda: set_def_dir())
-dev_folder_path.pack(pady=10)
+def_folder_path = tk.Button(settings_frame, text="select default folder", command=lambda: set_def_dir())
+def_folder_path.pack(pady=10)
+
+reset_def_folder_path = tk.Button(settings_frame, text="reset default folder", command=lambda: clear_default_dir())
+reset_def_folder_path.pack(pady=10)
 
 # ------ PACKING ------
 frame_list = [main_frame, convert_frame, settings_frame, root]
-button_list = [back_button, back_button_Conv, settings_button, audio_button, video_button, convert_button]
+button_list = [back_button, back_button_Conv, settings_button, audio_button, video_button, convert_button,def_folder_path,reset_def_folder_path]
 extra_list = [link_entry, link_label, panel, Welcome_label]
 
 
