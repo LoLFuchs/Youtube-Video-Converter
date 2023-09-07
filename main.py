@@ -10,9 +10,15 @@ sys.path.append(os.getcwd()+'\\chache')
 from cache.cache import *
 
 
+print(str(get_default_mode()))
 
-switch_value = True
+if str(get_default_dir()) == "True":
+    switch_value = True
+elif str(get_default_dir())== "False":
+    switch_value = False
 
+
+print(str(switch_value))
 
 Mode = "None"
 dir = "None"
@@ -77,7 +83,7 @@ def main():
         yd = yt.streams.get_audio_only()
     elif Mode == "playlist":
         print("playlist")
-        #todo aufruf einer Funktion  welche die Playlist runterlädt 
+        #todo aufruf einer Funktion welche die Playlist runterlädt 
         return
 
     if yd == None:
@@ -114,6 +120,13 @@ def set_def_dir():
     else:
         update_default_dir(def_dir)
 
+def set_def_mode():
+    global def_mode
+    def_mode = switch_value
+    update_default_mode(def_mode)
+    print(get_default_mode())
+    print("!")
+
 def toggle():
   
     global switch_value
@@ -144,7 +157,7 @@ def toggle():
 
         for extra in extra_list:
             extra.config(bg="white", fg="#000000")
-
+        
         switch_value = True
 
 main_frame = tk.Frame(root)
@@ -192,7 +205,7 @@ back_button_Conv.pack(pady=5)
 
 # ------ SETTINGS FRAME ------
 
-back_button = tk.Button(settings_frame, text="Back", command=go_back)
+back_button = tk.Button(settings_frame, text="Back", command=lambda:[go_back(), set_def_mode()])
 back_button.pack()
 
 switch = tk.Button(settings_frame, bd=0, bg="white",text="Light Mode", activebackground="white", command=toggle)
@@ -209,7 +222,6 @@ frame_list = [main_frame, convert_frame, settings_frame, root]
 button_list = [back_button, back_button_Conv, settings_button, audio_button, video_button, convert_button,def_folder_path,reset_def_folder_path, playlist_button]
 extra_list = [link_entry, link_label, panel, Welcome_label]
 
-
+toggle
 main_frame.pack()
-toggle()
 root.mainloop()
