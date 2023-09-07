@@ -158,14 +158,14 @@ settings_button.pack(pady=10, padx=10, anchor=tk.NE)
 
 #main_frame widget
 Welcome_label = tk.Label(main_frame, text="PyConvert", font=("arial", 25))
-Welcome_label.pack(pady=20, padx=10, anchor=tk.NE)
+Welcome_label.pack(pady=10, padx=10, anchor=tk.NE)
 
 #tkinter picture rezise 50x50
 img = Image.open(iconDir)
 img = img.resize((200, 200))
 img = ImageTk.PhotoImage(img)
 panel = tk.Label(main_frame, image=img)
-panel.pack(pady=20)
+panel.pack(pady=10)
 
 audio_button = tk.Button(main_frame, text="Audio", command=lambda: open_convert_window("audio"))
 audio_button.pack(pady=10)
@@ -206,7 +206,7 @@ reset_def_folder_path.pack(pady=10)
 
 # ------ PACKING ------
 frame_list = [main_frame, convert_frame, settings_frame, root]
-button_list = [back_button, back_button_Conv, settings_button, audio_button, video_button, convert_button,def_folder_path,reset_def_folder_path]
+button_list = [back_button, back_button_Conv, settings_button, audio_button, video_button, convert_button,def_folder_path,reset_def_folder_path, playlist_button]
 extra_list = [link_entry, link_label, panel, Welcome_label]
 
 
