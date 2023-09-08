@@ -10,15 +10,9 @@ sys.path.append(os.getcwd()+'\\chache')
 from cache.cache import *
 
 
-print(str(get_default_mode()))
-
-if str(get_default_dir()) == "True":
-    switch_value = True
-elif str(get_default_dir())== "False":
-    switch_value = False
+switch_value = not get_default_mode()
 
 
-print(str(switch_value))
 
 Mode = "None"
 dir = "None"
@@ -124,13 +118,11 @@ def set_def_mode():
     global def_mode
     def_mode = switch_value
     update_default_mode(def_mode)
-    print(get_default_mode())
-    print("!")
 
 def toggle():
   
     global switch_value
-    if switch_value == True:
+    if switch_value == True :
         switch.config(image=light,bg="#26242f",
                       activebackground="#26242f")
 
@@ -222,6 +214,6 @@ frame_list = [main_frame, convert_frame, settings_frame, root]
 button_list = [back_button, back_button_Conv, settings_button, audio_button, video_button, convert_button,def_folder_path,reset_def_folder_path, playlist_button]
 extra_list = [link_entry, link_label, panel, Welcome_label]
 
-toggle
+toggle()
 main_frame.pack()
 root.mainloop()
