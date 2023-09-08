@@ -5,11 +5,13 @@ from pytube import YouTube
 import os
 from pytube.exceptions import VideoUnavailable
 from PIL import Image, ImageTk
+import sys
+sys.path.append(os.getcwd()+'\\chache')
+from cache.cache import *
 
 
+switch_value = not get_default_mode()
 
-
-switch_value = True
 
 
 Mode = "None"
@@ -36,16 +38,22 @@ dark = ImageTk.PhotoImage(dark_open)
 
 # function called when converted started
 def main():
+    global yt
+    global yd
+    
     #Input form the text box
     link = link_entry.get()
-    dir = filedialog.askdirectory()
+    
+    if get_default_dir() != "null":
+        dir = get_default_dir()
+    else: 
+        dir = filedialog.askdirectory()
 
-    if dir == "":
+    if dir == "" or dir == None:
         messagebox.showwarning("Error", "Please select a directory.")
         return
     
-    global yt
-    global yd
+
     #checks if Links is filled
     if not link:
         messagebox.showwarning("Error", "Please enter a valid link.")
@@ -69,7 +77,7 @@ def main():
         yd = yt.streams.get_audio_only()
     elif Mode == "playlist":
         print("playlist")
-        #todo aufruf einer Funktion  welche die Playlist runterlädt 
+        #todo aufruf einer Funktion welche die Playlist runterlädt 
         return
 
     if yd == None:
@@ -101,12 +109,20 @@ def go_back():
 def set_def_dir():
     global def_dir
     def_dir = filedialog.askdirectory()
-    print(def_dir)
+    if def_dir == "":
+        messagebox.showwarning("Error", "Please select a directory.")
+    else:
+        update_default_dir(def_dir)
+
+def set_def_mode():
+    global def_mode
+    def_mode = switch_value
+    update_default_mode(def_mode)
 
 def toggle():
   
     global switch_value
-    if switch_value == True:
+    if switch_value == True :
         switch.config(image=light,bg="#26242f",
                       activebackground="#26242f")
 
@@ -133,7 +149,7 @@ def toggle():
 
         for extra in extra_list:
             extra.config(bg="white", fg="#000000")
-
+        
         switch_value = True
 
 main_frame = tk.Frame(root)
@@ -147,14 +163,14 @@ settings_button.pack(pady=10, padx=10, anchor=tk.NE)
 
 #main_frame widget
 Welcome_label = tk.Label(main_frame, text="PyConvert", font=("arial", 25))
-Welcome_label.pack(pady=20, padx=10, anchor=tk.NE)
+Welcome_label.pack(pady=10, padx=10, anchor=tk.NE)
 
 #tkinter picture rezise 50x50
 img = Image.open(iconDir)
 img = img.resize((200, 200))
 img = ImageTk.PhotoImage(img)
 panel = tk.Label(main_frame, image=img)
-panel.pack(pady=20)
+panel.pack(pady=10)
 
 audio_button = tk.Button(main_frame, text="Audio", command=lambda: open_convert_window("audio"))
 audio_button.pack(pady=10)
@@ -181,21 +197,23 @@ back_button_Conv.pack(pady=5)
 
 # ------ SETTINGS FRAME ------
 
-back_button = tk.Button(settings_frame, text="Back", command=go_back)
+back_button = tk.Button(settings_frame, text="Back", command=lambda:[go_back(), set_def_mode()])
 back_button.pack()
 
 switch = tk.Button(settings_frame, bd=0, bg="white",text="Light Mode", activebackground="white", command=toggle)
 switch.pack(padx=50, pady=150)
 
-dev_folder_path = tk.Button(settings_frame, text="select default folder", command=lambda: set_def_dir())
-dev_folder_path.pack(pady=10)
+def_folder_path = tk.Button(settings_frame, text="select default folder", command=lambda: set_def_dir())
+def_folder_path.pack(pady=10)
+
+reset_def_folder_path = tk.Button(settings_frame, text="reset default folder", command=lambda: clear_default_dir())
+reset_def_folder_path.pack(pady=10)
 
 # ------ PACKING ------
 frame_list = [main_frame, convert_frame, settings_frame, root]
-button_list = [back_button, back_button_Conv, settings_button, audio_button, video_button, convert_button]
+button_list = [back_button, back_button_Conv, settings_button, audio_button, video_button, convert_button,def_folder_path,reset_def_folder_path, playlist_button]
 extra_list = [link_entry, link_label, panel, Welcome_label]
 
-
-main_frame.pack()
 toggle()
+main_frame.pack()
 root.mainloop()
