@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import filedialog
 from tkinter import messagebox
 from pytube import YouTube
+from pytube import Playlist
 import os
 from pytube.exceptions import VideoUnavailable
 from PIL import Image, ImageTk
@@ -58,7 +59,23 @@ def main():
     if not link:
         messagebox.showwarning("Error", "Please enter a valid link.")
         return
-
+    
+    #checks if the convert is a video or a audio
+    if Mode == "video":
+        yd = yt.streams.get_highest_resolution()
+    elif Mode == "audio":
+        yd = yt.streams.get_audio_only()
+    elif Mode == "playlist":
+        print("playlist")
+        global p
+        p = Playlist(link)
+        for video in p.videos:
+            video.streams.get_highest_resolution().download(dir)
+        link_entry.delete(0, tk.END)
+        go_back()
+        messagebox.showinfo("Complete","Download completed!""\n \n File saved in: \n" + dir)
+        return
+    
     #tries to set yt to a link funtion from YT
     try: 
         yt = YouTube(link)
@@ -70,16 +87,6 @@ def main():
         messagebox.showwarning("Error", "Invalid YouTube link or video is unavailable.")
         return
     
-    #checks if the convert is a video or a audio
-    if Mode == "video":
-        yd = yt.streams.get_highest_resolution()
-    elif Mode == "audio":
-        yd = yt.streams.get_audio_only()
-    elif Mode == "playlist":
-        print("playlist")
-        #todo aufruf einer Funktion welche die Playlist runterlädt 
-        return
-
     if yd == None:
         messagebox.showwarning("Error","No available streams for the highest resolution.")
         return
