@@ -60,6 +60,17 @@ def main():
         messagebox.showwarning("Error", "Please enter a valid link.")
         return
     
+       #tries to set yt to a link funtion from YT
+    try: 
+        yt = YouTube(link)
+    except VideoUnavailable:
+        messagebox.showwarning("Error", f'Video {link} is unavaialable.')
+        return   
+    #checks if yt is a valid link
+    if yt == None:
+        messagebox.showwarning("Error", "Invalid YouTube link or video is unavailable.")
+        return
+    
     #checks if the convert is a video or a audio
     if Mode == "video":
         yd = yt.streams.get_highest_resolution()
@@ -76,20 +87,9 @@ def main():
         messagebox.showinfo("Complete","Download completed!""\n \n File saved in: \n" + dir)
         return
     
-    #tries to set yt to a link funtion from YT
-    try: 
-        yt = YouTube(link)
-    except VideoUnavailable:
-        messagebox.showwarning("Error", f'Video {link} is unavaialable.')
-        return   
-    #checks if yt is a valid link
-    if yt == None:
-        messagebox.showwarning("Error", "Invalid YouTube link or video is unavailable.")
-        return
-    
     if yd == None:
         messagebox.showwarning("Error","No available streams for the highest resolution.")
-        return
+        return 
 
     yd.download(dir)
     link_entry.delete(0, tk.END)
